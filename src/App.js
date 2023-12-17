@@ -1,7 +1,10 @@
 import './App.css';
 import { useState } from 'react';
+import { splitString, formatArrayToMatrix, sanitizeArray } from './utils/dataUtils';
+import DataTable from './components/molecules/DataTable';
 
 function App() {
+  const headings = ["Employee ID", "Project ID", "Start Date", "End Date"];
   const [data, setData] = useState([]);
   const [file, setFile] = useState([]);
 
@@ -15,7 +18,11 @@ function App() {
     fileReader.readAsText(file);
 
     fileReader.onload = function() {
-      setData(fileReader.result);
+      const dataArray = splitString(fileReader.result);
+      const dataMatrix = formatArrayToMatrix(dataArray);
+      const sanitizedData = sanitizeArray(dataMatrix);
+
+      setData(sanitizedData);
     }
   }
 
@@ -31,7 +38,7 @@ function App() {
         <button>IMPORT</button>
       </form>
       <div>
-        {data}
+        <DataTable headings={headings} data={data}/>
       </div>
     </div>
   );
