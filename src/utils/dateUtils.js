@@ -3,8 +3,16 @@ const MILLISECONDS_PER_DAY = 86400000;
 function formatStringToDate(string) {
     const today = new Date();
     const date = string !== "NULL" ? new Date(string) : today;
-
+    
     return date;
+}
+
+function formatDateFromArray(array) {
+    const day = array[2];
+    const month = array[1];
+    const year = array[3];
+
+    return `${day} ${month} ${year}`;
 }
 
 function calculateDaysOnProject(start, end) {
@@ -26,7 +34,7 @@ function calculateOverlappingDays(firstEmployee, secondEmployee) {
 
     const overlapDays = Math.ceil(Math.abs(overlapEnd-overlapStart) / MILLISECONDS_PER_DAY);
 
-    return overlapDays;
+    return [overlapDays, overlapStart.toDateString(), overlapEnd.toDateString()];
 }
 
-export { calculateDaysOnProject, calculateOverlappingDays }
+export { calculateDaysOnProject, calculateOverlappingDays, formatDateFromArray }
