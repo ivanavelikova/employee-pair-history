@@ -1,11 +1,14 @@
 import './App.css';
 import { useState } from 'react';
-import { splitString, formatArrayToMatrix, sanitizeArray } from './utils/dataUtils';
+import { splitString, formatArrayToMatrix, sanitizeArray, groupDataByProject, getEmployeePairsForEachProject } from './utils/dataUtils';
 import DataTable from './components/molecules/DataTable';
 
 function App() {
-  const headings = ["Employee ID", "Project ID", "Start Date", "End Date"];
+  const headingsDataTable = ["Employee ID", "Project ID", "Start Date", "End Date"];
+  const headingsPairsTable = ["Project ID", "Employees", "Period", "Days"];
+
   const [data, setData] = useState([]);
+  const [result, setResult] = useState([]);
   const [file, setFile] = useState([]);
 
   function handleFileChange(e) {
@@ -23,6 +26,11 @@ function App() {
       const sanitizedData = sanitizeArray(dataMatrix);
 
       setData(sanitizedData);
+
+      const groupedEmployeeData = groupDataByProject(data);
+      const employeePairs = getEmployeePairsForEachProject(groupedEmployeeData);
+      
+      setResult(employeePairs);
     }
   }
 
@@ -38,7 +46,10 @@ function App() {
         <button>IMPORT</button>
       </form>
       <div>
-        <DataTable headings={headings} data={data}/>
+        <DataTable headings={headingsDataTable} data={data} />
+      </div>
+      <div>
+        <DataTable headings={headingsPairsTable} data={result} />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { calculateDaysOnProject, calculateOverlappingDays } from "./dateUtils";
+import { calculateDaysOnProject, calculateOverlappingDays, formatDateFromArray } from "./dateUtils";
 
 function splitString(string) {
   return string.split(/(\r\n|\r|\n)/g);
@@ -51,28 +51,33 @@ function getEmployeePairsForEachProject(groupedData) {
   for (const projectID in groupedData) {
     if (groupedData.hasOwnProperty(projectID)) {
       const group = groupedData[projectID];
-      let maxOverlapDays = 0;
+      let maxOverlap = [0, '', ''];
       let maxOverlapPairs = [];
 
       for (let i = 0; i < group.length - 1; i++) {
         for (let j = i + 1; j < group.length; j++) {
           const overlapDays = calculateOverlappingDays(group[i], group[j]);
 
-          if (overlapDays > maxOverlapDays) {
-            maxOverlapDays = overlapDays;
-            maxOverlapPairs = [{ firstEmployee: group[i].employeeID, secondEmployee: group[j].employeeID }];
-          } else if (overlapDays === maxOverlapDays) {
-            maxOverlapPairs.push({ firstEmployee: group[i].employeeID, secondEmployee: group[j].employeeID });
+          if (overlapDays[0] > maxOverlap[0]) {
+            maxOverlap = overlapDays;
+            maxOverlapPairs = [group[i].employeeID, group[j].employeeID];
+          } else if (overlapDays[0] === maxOverlap[0]) {
+            maxOverlapPairs.push([group[i].employeeID, group[j].employeeID]);
           }
         }
       }
 
-      console.log(`ProjectID: ${projectID}`);
-      console.log("Overlapping days:", maxOverlapDays);
-      console.log("Pairs with the most days working together:", maxOverlapPairs);
-      console.log("--------------------------");
-
-      employeePairs.push({projectID, maxOverlapDays, maxOverlapPairs});
+      // console.log(`ProjectID: ${projectID}`);
+      // console.log("Overlapping days:", maxOverlap[0]);
+      // console.log("Pairs with the most days working together:", maxOverlapPairs);
+      // console.log("Starting from:", maxOverlap[1]);
+      // console.log("Ending on:", maxOverlap[2]);
+      // console.log("--------------------------");
+      const employeePairString = maxOverlapPairs.join(" and ");
+      const dateRange = [formatDateFromArray(maxOverlap[2].split(" ")), formatDateFromArray(maxOverlap[1].split(" "))].join(" - ");
+      const overlappingDays = maxOverlap[0];
+      
+      employeePairs.push([projectID, employeePairString, dateRange, overlappingDays]);
     }
   }
 
