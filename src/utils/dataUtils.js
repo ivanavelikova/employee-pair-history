@@ -41,7 +41,6 @@ function groupDataByProject(array) {
       });
     }
   }
-
   return groupedData;
 }
 
@@ -67,17 +66,11 @@ function getEmployeePairsForEachProject(groupedData) {
         }
       }
 
-      // console.log(`ProjectID: ${projectID}`);
-      // console.log("Overlapping days:", maxOverlap[0]);
-      // console.log("Pairs with the most days working together:", maxOverlapPairs);
-      // console.log("Starting from:", maxOverlap[1]);
-      // console.log("Ending on:", maxOverlap[2]);
-      // console.log("--------------------------");
       const employeePairString = maxOverlapPairs.join(" and ");
-      const dateRange = [formatDateFromArray(maxOverlap[2].split(" ")), formatDateFromArray(maxOverlap[1].split(" "))].join(" - ");
+      const dateRange = [formatDateFromArray(maxOverlap[1].split(" ")), formatDateFromArray(maxOverlap[2].split(" "))];
       const overlappingDays = maxOverlap[0];
       
-      employeePairs.push([projectID, employeePairString, dateRange, overlappingDays]);
+      employeePairs.push([projectID, employeePairString, dateRange.join(" - "), overlappingDays]);
     }
   }
 

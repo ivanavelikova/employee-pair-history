@@ -9,13 +9,13 @@ function App() {
 
   const [data, setData] = useState([]);
   const [result, setResult] = useState([]);
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState(null);
 
   function handleFileChange(e) {
     setFile(e.target.files[0]);
   }
   
-  function handleFileUpload() {
+  function handleFileUpload(file) {
     const fileReader = new FileReader();
 
     fileReader.readAsText(file);
@@ -27,7 +27,7 @@ function App() {
 
       setData(sanitizedData);
 
-      const groupedEmployeeData = groupDataByProject(data);
+      const groupedEmployeeData = groupDataByProject(sanitizedData);
       const employeePairs = getEmployeePairsForEachProject(groupedEmployeeData);
       
       setResult(employeePairs);
@@ -36,7 +36,7 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleFileUpload(e);
+    handleFileUpload(file);
   }
 
   return (
