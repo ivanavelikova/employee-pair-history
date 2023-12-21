@@ -4,7 +4,9 @@ import { splitString, formatArrayToMatrix, sanitizeArray, groupDataByProject, ge
 import DataTable from './components/molecules/DataTable';
 
 function App() {
+  const headingDataTable = "Imported Data";
   const headingsDataTable = ["Employee ID", "Project ID", "Start Date", "End Date"];
+  const headingPairsTable = "Longest Employee Pairs on Each Project";
   const headingsPairsTable = ["Project ID", "Employees", "Period", "Days"];
 
   const [data, setData] = useState([]);
@@ -16,21 +18,23 @@ function App() {
   }
   
   function handleFileUpload(file) {
-    const fileReader = new FileReader();
-
-    fileReader.readAsText(file);
-
-    fileReader.onload = function() {
-      const dataArray = splitString(fileReader.result);
-      const dataMatrix = formatArrayToMatrix(dataArray);
-      const sanitizedData = sanitizeArray(dataMatrix);
-
-      setData(sanitizedData);
-
-      const groupedEmployeeData = groupDataByProject(sanitizedData);
-      const employeePairs = getEmployeePairsForEachProject(groupedEmployeeData);
-      
-      setResult(employeePairs);
+    if (file) {
+      const fileReader = new FileReader();
+  
+      fileReader.readAsText(file);
+  
+      fileReader.onload = function() {
+        const dataArray = splitString(fileReader.result);
+        const dataMatrix = formatArrayToMatrix(dataArray);
+        const sanitizedData = sanitizeArray(dataMatrix);
+  
+        setData(sanitizedData);
+  
+        const groupedEmployeeData = groupDataByProject(sanitizedData);
+        const employeePairs = getEmployeePairsForEachProject(groupedEmployeeData);
+        
+        setResult(employeePairs);
+      }
     }
   }
 
@@ -41,15 +45,18 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-        <input type={"file"} accept={".csv"} onChange={handleFileChange}/>
-        <button>IMPORT</button>
-      </form>
-      <div>
-        <DataTable headings={headingsDataTable} data={data} />
-      </div>
-      <div>
-        <DataTable headings={headingsPairsTable} data={result} />
+      <div className="container">
+        <h2>Upload CSV file</h2>
+        <form onSubmit={handleSubmit}>
+          <input type={"file"} accept={".csv"} onChange={handleFileChange}/>
+          <button>IMPORT</button>
+        </form>
+        <div>
+          {data.length > 0 && <DataTable heading={headingDataTable} headings={headingsDataTable} data={data} />}
+        </div>
+        <div>
+          {result.length > 0 && <DataTable heading={headingPairsTable} headings={headingsPairsTable} data={result} />}
+        </div>
       </div>
     </div>
   );

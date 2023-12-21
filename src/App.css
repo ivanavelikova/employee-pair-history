@@ -1,3 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 .App {
-  text-align: center;
+  margin: 3rem 4rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #101814;
+  font-weight: bold;
+  margin: 4rem 0 1rem 0;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  color: #121619;
+  position: relative;
+}
+
+input {
+  border: 2px solid #2D4739;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input::file-selector-button {
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+}
+
+input::file-selector-button:hover {
+  color: #2D4739;
+}
+
+form button {
+  background-color: #406450;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 24px;
+  height: 36px;
+  border: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #2D4739;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead {
+  background-color: #76A78C;
+  color: #fff;
+  text-align: left;
+}
+
+table thead th {
+  padding: 8px 16px;
+  border-right: 2px solid #fff;
+}
+
+table tbody td {
+  padding: 8px 16px;
+  border-right: 2px solid #fff;
+}
+
+table tbody tr:nth-of-type(odd) {
+  background-color: #E6EFEA;
+}
+
+@media (max-width: 768px) {
+  .App {
+    margin: 0.5rem 1rem;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+  input, form button {
+    width: 100%;
+  }
+
+  form button {
+    position: static;
+  }
 }
