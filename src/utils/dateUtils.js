@@ -40,10 +40,10 @@ function calculateOverlappingDays(firstEmployee, secondEmployee) {
     const secondEmployeeStart = formatStringToDate(secondEmployee.start);
     const secondEmployeeEnd = formatStringToDate(secondEmployee.end);
 
-    const overlapStart = firstEmployeeStart < secondEmployeeStart ? secondEmployeeStart : firstEmployeeStart;
-    const overlapEnd = firstEmployeeEnd > secondEmployeeEnd ? secondEmployeeEnd : firstEmployeeEnd;
+    const overlapStart = new Date(Math.max(firstEmployeeStart, secondEmployeeStart));
+    const overlapEnd = new Date(Math.min(firstEmployeeEnd, secondEmployeeEnd));
 
-    const overlapDays = Math.ceil(Math.abs(overlapEnd-overlapStart) / MILLISECONDS_PER_DAY);
+    const overlapDays = Math.ceil(Math.max(0, (overlapEnd - overlapStart) / MILLISECONDS_PER_DAY));
 
     return [overlapDays, overlapStart.toDateString(), overlapEnd.toDateString()];
 }
