@@ -14,11 +14,12 @@
   margin: 0 auto;
 }
 
-.table-title {
+.table-title,
+.file-upload-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: self-start;
+  align-items: center;
   margin: 4rem 0 1rem 0;
 }
 
@@ -49,10 +50,6 @@ input[type="file"] {
   width: 100%;
 }
 
-input[type="text" i] {
-  padding: 8px 16px;
-}
-
 input::file-selector-button {
   border: none;
   cursor: pointer;
@@ -61,6 +58,48 @@ input::file-selector-button {
 
 input::file-selector-button:hover {
   color: #2D4739;
+}
+
+.search-filter {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input[type="text" i] {
+  padding: 4px 8px;
+  margin-left: 4px;
+}
+
+.filter-tabs .filter-btn {
+  background-color: transparent;
+  padding: 4px 8px;
+  color: #101814;
+  border: 1px solid #2D4739;
+  margin: 4px;
+}
+
+.filter-tabs .filter-btn:hover,
+.filter-tabs .filter-btn:focus {
+  background-color: #CEDFD6;
+  cursor: pointer;
+}
+
+.filter-tabs .clear-btn {
+  background-color: transparent;
+  padding: 0;
+  font-weight: bold;
+  color: #CE4B27;
+  border: none;
+  margin: 0 4px;
+}
+
+.filter-tabs .clear-btn:hover,
+.filter-tabs .clear-btn:active {
+  color: #AB3F21;
+  cursor: pointer;
 }
 
 form button {
@@ -117,6 +156,7 @@ table tbody tr:nth-of-type(odd) {
 
   form, .table-title {
     flex-direction: column;
+    align-items: flex-start;
   }
 
   input, form button {

@@ -6,7 +6,10 @@ function Search({text, setText}) {
    };
 
    return (
+    <div>
+       <span>Search:</span>
        <input type="text" value={text} onChange={handleSearchChange} placeholder="Search..." />
+    </div>
    )
 }
 

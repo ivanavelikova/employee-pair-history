@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { splitString, formatArrayToMatrix, sanitizeArray, groupDataByProject, getEmployeePairsForEachProject } from '../../utils/dataUtils';
 import Heading from './Heading';
+import { splitString, formatArrayToMatrix, sanitizeArray, groupDataByProject, getEmployeePairsForEachProject } from '../../utils/dataUtils';
+import { useState } from 'react';
 
 function FileUploader ({heading, setData, setResult}) {
   const [file, setFile] = useState(null);
@@ -37,7 +37,9 @@ function FileUploader ({heading, setData, setResult}) {
 
   return (
     <>
-      <Heading heading={heading}/>
+      <div className="file-upload-title">
+        <Heading heading={heading}/>
+      </div>
       <form onSubmit={handleSubmit}>
         <input type={"file"} accept={".csv"} onChange={handleFileChange}/>
         <button>IMPORT</button>

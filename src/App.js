@@ -1,7 +1,7 @@
-import './App.css';
-import { useState } from 'react';
 import DataTable from './components/molecules/DataTable';
 import FileUploader from './components/atoms/FileUploader';
+import './App.css';
+import { useState } from 'react';
 
 function App() {
   const headingDataTable = "Imported Data";
