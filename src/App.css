@@ -60,6 +60,24 @@ input::file-selector-button:hover {
   color: #2D4739;
 }
 
+form button {
+  background-color: #406450;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 24px;
+  height: 36px;
+  border: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #2D4739;
+}
+
 .search-filter {
   display: flex;
   gap: 1.5rem;
@@ -102,24 +120,6 @@ input[type="text" i] {
   cursor: pointer;
 }
 
-form button {
-  background-color: #406450;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 8px 24px;
-  height: 36px;
-  border: none;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #2D4739;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -136,13 +136,13 @@ table thead th {
   border-right: 2px solid #fff;
 }
 
+table tbody tr:nth-of-type(odd) {
+  background-color: #E6EFEA;
+}
+
 table tbody td {
   padding: 8px 16px;
   border-right: 2px solid #fff;
-}
-
-table tbody tr:nth-of-type(odd) {
-  background-color: #E6EFEA;
 }
 
 @media (max-width: 768px) {

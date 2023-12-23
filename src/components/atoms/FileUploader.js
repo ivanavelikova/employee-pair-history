@@ -38,10 +38,10 @@ function FileUploader ({heading, setData, setResult}) {
   return (
     <>
       <div className="file-upload-title">
-        <Heading heading={heading}/>
+        <Heading heading={heading} />
       </div>
       <form onSubmit={handleSubmit}>
-        <input type={"file"} accept={".csv"} onChange={handleFileChange}/>
+        <input type={"file"} accept={".csv"} onChange={handleFileChange} />
         <button>IMPORT</button>
       </form>
     </>
